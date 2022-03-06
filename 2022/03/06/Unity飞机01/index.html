@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>test_my_site | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="test_my_site">
-<meta property="og:url" content="http://example.com/2022/02/23/test-my-site/index.html">
+  <meta name="description" content="Unity飞机游戏01：制作一个玩家可以操作的平面2D角色 从零开始制作一个2D飞机游戏 01： 如何制作一个平面可供玩家操作的角色 Step 01 准备素材 素材来自Unity Asset Store  传送门：https:&#x2F;&#x2F;assetstore.unity.com&#x2F;packages&#x2F;2d&#x2F;characters&#x2F;basic-pixel-art-for-retro-2d-shooter-3865">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/03/06/Unity%E9%A3%9E%E6%9C%BA01/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Unity飞机游戏01：制作一个玩家可以操作的平面2D角色 从零开始制作一个2D飞机游戏 01： 如何制作一个平面可供玩家操作的角色 Step 01 准备素材 素材来自Unity Asset Store  传送门：https:&#x2F;&#x2F;assetstore.unity.com&#x2F;packages&#x2F;2d&#x2F;characters&#x2F;basic-pixel-art-for-retro-2d-shooter-3865">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-23T09:12:19.000Z">
-<meta property="article:modified_time" content="2022-02-23T09:12:19.908Z">
+<meta property="og:image" content="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg">
+<meta property="og:image" content="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image004.jpg">
+<meta property="og:image" content="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image006.jpg">
+<meta property="article:published_time" content="2022-03-06T13:18:25.632Z">
+<meta property="article:modified_time" content="2022-03-06T13:18:05.257Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -144,27 +150,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-test-my-site" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Unity飞机01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      test_my_site
-    </h1>
-  
-
-        
-        <a href="/2022/02/23/test-my-site/" class="archive-article-date">
-  	<time datetime="2022-02-23T09:12:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-23</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><strong>Unity飞机游戏01：制作一个玩家可以操作的平面2D角色</strong></p>
+<p>从零开始制作一个2D飞机游戏</p>
+<p>01： 如何制作一个平面可供玩家操作的角色</p>
+<p><strong>Step 01 准备素材</strong></p>
+<p>素材来自Unity Asset Store </p>
+<p>传送门：<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/2d/characters/basic-pixel-art-for-retro-2d-shooter-38653">https://assetstore.unity.com/packages/2d/characters/basic-pixel-art-for-retro-2d-shooter-38653</a></p>
+<p>作者制作了一整套像素风格的飞机游戏素材，我们这里借用一部分来使用。</p>
+<p><strong>Step 02 放置背景板</strong></p>
+<p>在3D环境下来制作2D游戏，首先需要一个背景板来代表我们游戏的平面。</p>
+<p><img src="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg" alt="img"></p>
+<p>Create -&gt; Quad 来添加一个数值平面。调整相机为平行透视的模式来达到2D的效果。同时调整相机和平面的相对位置达到背景板的效果。</p>
+<p><strong>Step 03 拖入主角</strong></p>
+<p>从素材中直接将我们的主角飞机拖入场景，重命名为Player</p>
+<p><img src="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image004.jpg" alt="img"></p>
+<p><img src="file:///C:/Users/11815/AppData/Local/Temp/msohtmlclip1/01/clip_image006.jpg" alt="img"></p>
+<p>新建一个脚本“PlayerController”，再把脚本拖给这个Player。</p>
+<p>此外，为Player添加2D刚体组件和碰撞体（在这一章节中不是必须的操作），方便后续战斗功能的制作</p>
+<p>打开脚本开始编辑。</p>
+<p><strong>Step 04 编辑脚本</strong></p>
+<p>设置一个public的速度数值speed，表示主角的移动速度。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> speed;</span><br></pre></td></tr></table></figure>
+
+<p>在Start中，我们线获取到主角的sprite renderer组件和 rigidbody组件</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Start is called before the first frame update</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line"></span><br><span class="line">​    rb = GetComponent&lt;Rigidbody2D&gt;();</span><br><span class="line"></span><br><span class="line">​    sr = GetComponent&lt;SpriteRenderer&gt;();</span><br><span class="line"></span><br><span class="line">​    dTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">​    currentHealth = maxHealth;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置一个Move函数来控制主角移动</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Move</span>()</span></span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line"></span><br><span class="line">​    <span class="built_in">float</span> xInput = Input.GetAxisRaw(<span class="string">&quot;Horizontal&quot;</span>);</span><br><span class="line"></span><br><span class="line">​    <span class="built_in">float</span> yInput = Input.GetAxisRaw(<span class="string">&quot;Vertical&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      rb.velocity = <span class="keyword">new</span> Vector2(xInput * speed, yInput * speed);</span><br><span class="line"></span><br><span class="line">​      <span class="keyword">if</span> (xInput != <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">​        <span class="comment">//transform.localScale = new Vector3(xInput, 1, 1); </span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用Input.GetAxisRaw的方式来获取来自键盘方向键或者wasd的输入。</p>
+<p>float GetAxis = Input.GetAxis(“Vertical”);   </p>
+<p>按下向上方向键，返回值从0变到1.0</p>
+<p>按下向下方向键，返回值从1.0变到-1.</p>
+<p>float v = Input.GetAxisRaw(“Vertical”);</p>
+<p>按下向上方向键，返回值为1.0</p>
+<p>按下向下方向键，返回值为0，继续按下返回值为-1.0</p>
+<p>我们通过给刚体组件赋予速度的方式来修改当前的移动状态。这种方式比较方便并且没有物理的因素参与，因此主角也是即时响应操作的。</p>
+<p>如果想要操作的手感有一定的惯性，也可以通过对刚体施加力的方式来进行移动。</p>
+<p>注意到这里注释的最后一行调整了物体的localScale是为了让角色在左右移动的时候翻转方向，但对于我们的飞机而言没有这个必要。</p>
+<p>写好Move函数之后直接在Update中调用。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update is called once per frame</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line"></span><br><span class="line">​    Move();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<p>回到Unity运行游戏，主角已经可以在屏幕中自由移动了。</p>
+
       
 
       
@@ -185,18 +220,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/03/06/Unity%E9%A3%9E%E6%9C%BA01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/02/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2022/02/23/test-my-site/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">test_my_site</div>
       <i class="icon-circle-right"></i>
     </a>
   
