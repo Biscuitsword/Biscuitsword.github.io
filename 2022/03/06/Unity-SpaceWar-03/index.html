@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>Unity飞机游戏03：制作子弹击中效果 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="Unity飞机游戏03：制作子弹击中效果书接上文，有了子弹就要有靶子。 Step 01: 设置敌人我们从素材中拖入一个新的飞机来充当敌人，命名为Enemy，添加2D碰撞体和刚体组件，碰撞体设置为trigger。 创建脚本EnemyController，拖给Enemy。 EnemyController可以基本上照抄PlayerController，我们暂时不需要移动，可以把Move的内容全部注释掉。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity飞机游戏03：制作子弹击中效果">
+<meta property="og:url" content="http://example.com/2022/03/06/Unity-SpaceWar-03/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Unity飞机游戏03：制作子弹击中效果书接上文，有了子弹就要有靶子。 Step 01: 设置敌人我们从素材中拖入一个新的飞机来充当敌人，命名为Enemy，添加2D碰撞体和刚体组件，碰撞体设置为trigger。 创建脚本EnemyController，拖给Enemy。 EnemyController可以基本上照抄PlayerController，我们暂时不需要移动，可以把Move的内容全部注释掉。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-06T14:41:40.000Z">
+<meta property="article:modified_time" content="2022-03-06T14:45:19.862Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -142,16 +146,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Unity-SpaceWar-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Unity-SpaceWar-03" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/06/Unity-SpaceWar-03/">Unity飞机游戏03：制作子弹击中效果</a>
+    <h1 class="article-title" itemprop="name">
+      Unity飞机游戏03：制作子弹击中效果
     </h1>
   
 
@@ -214,16 +216,24 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/06/Unity-SpaceWar-03/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/06/Unity-SpaceWar-02/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Unity飞机游戏02：制作飞行的子弹</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -243,324 +253,14 @@
 
 
 
-
   
-    <article id="post-Unity-SpaceWar-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/06/Unity-SpaceWar-02/">Unity飞机游戏02：制作飞行的子弹</a>
-    </h1>
   
 
-        
-        <a href="/2022/03/06/Unity-SpaceWar-02/" class="archive-article-date">
-  	<time datetime="2022-03-06T14:35:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Unity飞机游戏02：制作飞行的子弹"><a href="#Unity飞机游戏02：制作飞行的子弹" class="headerlink" title="Unity飞机游戏02：制作飞行的子弹"></a><strong>Unity飞机游戏02：制作飞行的子弹</strong></h1><p>书接上文，飞机游戏少不了华丽的弹幕。我们来制作飞行的子弹。</p>
-<h2 id="Step-01：制作子弹预制体"><a href="#Step-01：制作子弹预制体" class="headerlink" title="Step 01：制作子弹预制体"></a><strong>Step 01：制作子弹预制体</strong></h2><p>素材包中包含了子弹的图片以及对应的动画（事实上有没有动画不影响我们这一步的制作，随便捏一个平面图形都可以替代），将素材中的预制体拖入场景，重新保存为一个新的original prefab。</p>
-<p><img src="/2022/03/06/Unity-SpaceWar-02/01.jpg" alt="img"></p>
-<p>为子弹添加一个2D圆形碰撞体，调整半径，勾选is Trigger （这个游戏里不需要物理碰撞效果， 统一使用 is Trigger能减少很多不必要的麻烦）。</p>
-<h2 id="Step-02：编写脚本"><a href="#Step-02：编写脚本" class="headerlink" title="Step 02：编写脚本"></a><strong>Step 02：编写脚本</strong></h2><p>首先在上文PlayerController的代码中预留出子弹预制体的参数，并且把预制体拖给他。</p>
-<p>此外，在player下添加一个空物体作为子物体，命名为ShootPoint，它将是子弹生成的位置，拖动到合适的发射点并拖给脚本参数。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Header(<span class="string">&quot;Shoot Bullet&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> Transform shootPoint;</span><br><span class="line"><span class="keyword">public</span> GameObject playerBullet;</span><br></pre></td></tr></table></figure>
-
-<p>我们要让主角能够自动射击，添加一个射击间隔参数interval来控制射击的间隔</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Header(<span class="string">&quot;Shoot Interval&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> interval;</span><br><span class="line"><span class="built_in">float</span> dTime;</span><br></pre></td></tr></table></figure>
-
-<p>注意到我们不能直接修改interval的值，否则重置射击CD的时候就不知道标准了，因此再设置一个dTime参数，在start中初始化并且用作后续的计时器。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    ……</span><br><span class="line">​    dTime = <span class="number">0</span>;</span><br><span class="line">​    ……</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置一个Shoot()函数来编写设计的主要逻辑。</p>
-<p>如果计时器到了时间，就在枪口实例化一个子弹出来，再重置计时器。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Shoot</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (dTime &lt;= <span class="number">0</span>)</span><br><span class="line">​    &#123;</span><br><span class="line">​      Instantiate(playerBullet, shootPoint.position, Quaternion.identity);</span><br><span class="line">​      dTime = interval;</span><br><span class="line">​    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在Update中进行计时器的刷新以及Shoot的调用。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Update is called once per frame</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (dTime &gt; <span class="number">0</span>) dTime -= Time.deltaTime;</span><br><span class="line">​    Shoot();</span><br><span class="line">​    Move();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>到此为止，回到Unity，给interval设置一个合适的参数并运行，可以看到子弹持续在枪口生成了。那么新的问题来了，怎么让子弹飞？</p>
-<h2 id="Step-03-编写子弹脚本"><a href="#Step-03-编写子弹脚本" class="headerlink" title="Step 03: 编写子弹脚本"></a><strong>Step 03: 编写子弹脚本</strong></h2><p>给子弹也编写一个脚本叫PlayerBullet，拖给子弹（注意要应用到预制体）</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> speed;</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> damage;</span><br><span class="line">Vector3 speedVec3;</span><br></pre></td></tr></table></figure>
-
-<p>代码逻辑相对简单，给子弹一个飞行速度speed，造成伤害damage</p>
-<p>speedVec3则用来保存子弹的飞行状态。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    speedVec3.y = speed;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于子弹这样一个不需要操作的物体，我们使用直接控制position的方式来让它进行移动：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Move</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    transform.position += speedVec3 * Time.deltaTime;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后在Update中调用Move函数即可。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Update is called once per frame</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    Move();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置speed并运行，至此我们已经能看到一个相当良好的效果，子弹会持续生成并biubiu地射出。</p>
-<p>但是我们注意到子弹可以一直飞下去，这样随着游戏进行，屏幕外没用的子弹会越来越多，这是对游戏资源的浪费，因此我们需要一个能够删除飞出界的子弹的方法。</p>
-<h2 id="Step-04-设置边界点"><a href="#Step-04-设置边界点" class="headerlink" title="Step 04: 设置边界点"></a><strong>Step 04: 设置边界点</strong></h2><p>我们在屏幕边缘设置一个边界点topline，并且在PlayerBullet设置一个对应的参数。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject topLine;</span><br></pre></td></tr></table></figure>
-
-<p>这次我们不用Pulic然后拖入的方式，因为topline只在场景中出现，不是预制体，使用public是无法直接获取它的坐标的。</p>
-<p>我们在start时直接通过topline这个名字对它进行查找。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    topLine = GameObject.Find(<span class="string">&quot;TopLine&quot;</span>);</span><br><span class="line">​    speedVec3.y = speed;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在Move函数中，我们加一步检测，如果子弹超出了边界，我们就将它Destroy</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Move</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (transform.position.y &gt; topLine.transform.position.y)</span><br><span class="line">​      Destroy(gameObject);</span><br><span class="line">​    transform.position += speedVec3 * Time.deltaTime;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>仿照这个方法，我们可以进一步设定下、左、右的边界，（如果你需要向其他方向飞行的子弹）。</p>
-<p><strong>会飞的子弹制作完成。</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/06/Unity-SpaceWar-02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Unity_SpaceWar_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/06/Unity_SpaceWar_01/">Unity 飞机游戏01:制作一个平面2D角色</a>
-    </h1>
   
 
-        
-        <a href="/2022/03/06/Unity_SpaceWar_01/" class="archive-article-date">
-  	<time datetime="2022-03-06T13:23:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Unity飞机游戏01：制作一个玩家可以操作的平面2D角色"><a href="#Unity飞机游戏01：制作一个玩家可以操作的平面2D角色" class="headerlink" title="Unity飞机游戏01：制作一个玩家可以操作的平面2D角色"></a><strong>Unity飞机游戏01：制作一个玩家可以操作的平面2D角色</strong></h1><p>从零开始制作一个2D飞机游戏</p>
-<p>01： 如何制作一个平面可供玩家操作的角色</p>
-        
-          <a class="article-more-a" href="/2022/03/06/Unity_SpaceWar_01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/06/Unity_SpaceWar_01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-test-my-site" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/23/test-my-site/">test_my_site</a>
-    </h1>
   
 
-        
-        <a href="/2022/02/23/test-my-site/" class="archive-article-date">
-  	<time datetime="2022-02-23T09:12:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/23/test-my-site/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/23/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/23/hello-world/" class="archive-article-date">
-  	<time datetime="2022-02-23T09:07:38.678Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/23/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -583,8 +283,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
