@@ -165,45 +165,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Unity飞机游戏03：制作子弹击中效果"><a href="#Unity飞机游戏03：制作子弹击中效果" class="headerlink" title="Unity飞机游戏03：制作子弹击中效果"></a><strong>Unity飞机游戏03：制作子弹击中效果</strong></h1><p>书接上文，有了子弹就要有靶子。</p>
-<h2 id="Step-01-设置敌人"><a href="#Step-01-设置敌人" class="headerlink" title="Step 01: 设置敌人"></a><strong>Step 01: 设置敌人</strong></h2><p>我们从素材中拖入一个新的飞机来充当敌人，命名为Enemy，添加2D碰撞体和刚体组件，碰撞体设置为trigger。</p>
-<p>创建脚本EnemyController，拖给Enemy。</p>
-<p>EnemyController可以基本上照抄PlayerController，我们暂时不需要移动，可以把Move的内容全部注释掉。</p>
-<p>我们的碰撞采用trigger检测，因此使用OnTriggerEnter2D这个方法来响应碰撞事件</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter2D</span>(<span class="params">Collider2D other</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (other.CompareTag(<span class="string">&quot;PlayerBullet&quot;</span>))</span><br><span class="line">​    &#123;</span><br><span class="line">​      Destroy(other.gameObject);</span><br><span class="line">​    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>当碰撞发生时，使用Tag的方式（也可以查找碰撞物体是否含有PlayerBullet这个脚本）来检测碰撞的是否是子弹，如果是子弹，那么就摧毁子弹。</p>
-<p>相应的，我们为子弹的预制体设置Tag为PlayerBullet</p>
-<p>回到Unity并运行，可以发现射中敌人时，子弹消失了。</p>
-<h2 id="Step-02-设置血量"><a href="#Step-02-设置血量" class="headerlink" title="Step 02: 设置血量"></a><strong>Step 02: 设置血量</strong></h2><p>接下来我们要让子弹能够击杀敌人。</p>
-<p>为敌人设置血量，编辑“EnemyController”</p>
-<p>设置血量参数Health</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Header(<span class="string">&quot;Character Data&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> health;</span><br></pre></td></tr></table></figure>
-
-<p>设置受伤函数GetHit</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">GetHit</span>(<span class="params"><span class="built_in">int</span> damage</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">​    health -= damage;</span><br><span class="line">​    <span class="keyword">if</span>(health &lt;= <span class="number">0</span>) Destroy(gameObject);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>每次结算后在检测一下还有没有血，没血就把这个Enemy摧毁掉。</p>
-<h2 id="Step-03-制作受伤效果"><a href="#Step-03-制作受伤效果" class="headerlink" title="Step 03: 制作受伤效果"></a><strong>Step 03: 制作受伤效果</strong></h2><p>给击中增加一点打击感，我们添加一点简单的特效，受击变红</p>
-<p>首先设置Sprite Renderer</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SpriteRenderer sr;</span><br></pre></td></tr></table></figure>
-
-<p>在start中为sr赋值</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    sr = GetComponent&lt;SpriteRenderer&gt;();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>再设置变红的时长（对于主角来说也可以是无敌时间）</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> invincibleTime;</span><br></pre></td></tr></table></figure>
-
-<p>使用协程的方式来改变sr的颜色，先变色，等待，再变回来</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function">IEnumerator <span class="title">HitEffect</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    sr.color = Color.red;</span><br><span class="line">​    <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSecondsRealtime</span>(<span class="params">invincibleTime</span>)</span>;</span><br><span class="line">​    sr.color = Color.white;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在GetHit中调用协程</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">GetHit</span>(<span class="params"><span class="built_in">int</span> damage</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="comment">//sr.color = Color.red;</span></span><br><span class="line">​    health -= damage;</span><br><span class="line">​    <span class="keyword">if</span>(health &lt;= <span class="number">0</span>) Destroy(gameObject);</span><br><span class="line">​    StartCoroutine(HitEffect());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>回到Unity并运行，给public的参数都设置合适的值。可以看到当子弹击中时敌人变红一段时间，血量打完时敌人消失。</p>
-<p><strong>依照之前的过程，我们还可以为制作敌人的子弹”EnemyBullet”，并且为玩家角色添加对应的受效果，制作完整的基础战斗系统。</strong></p>
-
+<p>03: 制作子弹击中效果</p>
+        
+          <a class="article-more-a" href="/2022/03/06/Unity-SpaceWar-03/#more">more >></a>
+        
       
 
       
@@ -266,57 +231,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Unity飞机游戏02：制作飞行的子弹"><a href="#Unity飞机游戏02：制作飞行的子弹" class="headerlink" title="Unity飞机游戏02：制作飞行的子弹"></a><strong>Unity飞机游戏02：制作飞行的子弹</strong></h1><p>书接上文，飞机游戏少不了华丽的弹幕。我们来制作飞行的子弹。</p>
-<h2 id="Step-01：制作子弹预制体"><a href="#Step-01：制作子弹预制体" class="headerlink" title="Step 01：制作子弹预制体"></a><strong>Step 01：制作子弹预制体</strong></h2><p>素材包中包含了子弹的图片以及对应的动画（事实上有没有动画不影响我们这一步的制作，随便捏一个平面图形都可以替代），将素材中的预制体拖入场景，重新保存为一个新的original prefab。</p>
-<p><img src="/2022/03/06/Unity-SpaceWar-02/01.jpg" alt="img"></p>
-<p>为子弹添加一个2D圆形碰撞体，调整半径，勾选is Trigger （这个游戏里不需要物理碰撞效果， 统一使用 is Trigger能减少很多不必要的麻烦）。</p>
-<h2 id="Step-02：编写脚本"><a href="#Step-02：编写脚本" class="headerlink" title="Step 02：编写脚本"></a><strong>Step 02：编写脚本</strong></h2><p>首先在上文PlayerController的代码中预留出子弹预制体的参数，并且把预制体拖给他。</p>
-<p>此外，在player下添加一个空物体作为子物体，命名为ShootPoint，它将是子弹生成的位置，拖动到合适的发射点并拖给脚本参数。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Header(<span class="string">&quot;Shoot Bullet&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> Transform shootPoint;</span><br><span class="line"><span class="keyword">public</span> GameObject playerBullet;</span><br></pre></td></tr></table></figure>
-
-<p>我们要让主角能够自动射击，添加一个射击间隔参数interval来控制射击的间隔</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Header(<span class="string">&quot;Shoot Interval&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> interval;</span><br><span class="line"><span class="built_in">float</span> dTime;</span><br></pre></td></tr></table></figure>
-
-<p>注意到我们不能直接修改interval的值，否则重置射击CD的时候就不知道标准了，因此再设置一个dTime参数，在start中初始化并且用作后续的计时器。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    ……</span><br><span class="line">​    dTime = <span class="number">0</span>;</span><br><span class="line">​    ……</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置一个Shoot()函数来编写设计的主要逻辑。</p>
-<p>如果计时器到了时间，就在枪口实例化一个子弹出来，再重置计时器。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Shoot</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (dTime &lt;= <span class="number">0</span>)</span><br><span class="line">​    &#123;</span><br><span class="line">​      Instantiate(playerBullet, shootPoint.position, Quaternion.identity);</span><br><span class="line">​      dTime = interval;</span><br><span class="line">​    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在Update中进行计时器的刷新以及Shoot的调用。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Update is called once per frame</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (dTime &gt; <span class="number">0</span>) dTime -= Time.deltaTime;</span><br><span class="line">​    Shoot();</span><br><span class="line">​    Move();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>到此为止，回到Unity，给interval设置一个合适的参数并运行，可以看到子弹持续在枪口生成了。那么新的问题来了，怎么让子弹飞？</p>
-<h2 id="Step-03-编写子弹脚本"><a href="#Step-03-编写子弹脚本" class="headerlink" title="Step 03: 编写子弹脚本"></a><strong>Step 03: 编写子弹脚本</strong></h2><p>给子弹也编写一个脚本叫PlayerBullet，拖给子弹（注意要应用到预制体）</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> speed;</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> damage;</span><br><span class="line">Vector3 speedVec3;</span><br></pre></td></tr></table></figure>
-
-<p>代码逻辑相对简单，给子弹一个飞行速度speed，造成伤害damage</p>
-<p>speedVec3则用来保存子弹的飞行状态。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    speedVec3.y = speed;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于子弹这样一个不需要操作的物体，我们使用直接控制position的方式来让它进行移动：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Move</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    transform.position += speedVec3 * Time.deltaTime;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后在Update中调用Move函数即可。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Update is called once per frame</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    Move();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置speed并运行，至此我们已经能看到一个相当良好的效果，子弹会持续生成并biubiu地射出。</p>
-<p>但是我们注意到子弹可以一直飞下去，这样随着游戏进行，屏幕外没用的子弹会越来越多，这是对游戏资源的浪费，因此我们需要一个能够删除飞出界的子弹的方法。</p>
-<h2 id="Step-04-设置边界点"><a href="#Step-04-设置边界点" class="headerlink" title="Step 04: 设置边界点"></a><strong>Step 04: 设置边界点</strong></h2><p>我们在屏幕边缘设置一个边界点topline，并且在PlayerBullet设置一个对应的参数。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GameObject topLine;</span><br></pre></td></tr></table></figure>
-
-<p>这次我们不用Pulic然后拖入的方式，因为topline只在场景中出现，不是预制体，使用public是无法直接获取它的坐标的。</p>
-<p>我们在start时直接通过topline这个名字对它进行查找。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    topLine = GameObject.Find(<span class="string">&quot;TopLine&quot;</span>);</span><br><span class="line">​    speedVec3.y = speed;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在Move函数中，我们加一步检测，如果子弹超出了边界，我们就将它Destroy</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Move</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">​    <span class="keyword">if</span> (transform.position.y &gt; topLine.transform.position.y)</span><br><span class="line">​      Destroy(gameObject);</span><br><span class="line">​    transform.position += speedVec3 * Time.deltaTime;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>仿照这个方法，我们可以进一步设定下、左、右的边界，（如果你需要向其他方向飞行的子弹）。</p>
-<p><strong>会飞的子弹制作完成。</strong></p>
-
+<p>02： 制作飞行的子弹</p>
+        
+          <a class="article-more-a" href="/2022/03/06/Unity-SpaceWar-02/#more">more >></a>
+        
       
 
       
