@@ -29,12 +29,14 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Biscuitsword" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Biscuitsword/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-11T13:44:08.000Z" title="2023/9/11 21:44:08">2023-09-11</time>发表</span><span class="level-item"><time dateTime="2023-09-11T16:11:52.971Z" title="2023/9/12 00:11:52">2023-09-12</time>更新</span><span class="level-item">5 分钟读完 (大约679个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/09/11/devlog-azoth-23-9-11/">devlog_azoth_23_9_11</a></p><div class="content"><h1 id="Azoth开发日志-2023-09"><a href="#Azoth开发日志-2023-09" class="headerlink" title="Azoth开发日志_2023_09"></a>Azoth开发日志_2023_09</h1><h2 id="9-9"><a href="#9-9" class="headerlink" title="9.9"></a>9.9</h2><h3 id="1-人物状态栏UI制作"><a href="#1-人物状态栏UI制作" class="headerlink" title="1. 人物状态栏UI制作"></a>1. 人物状态栏UI制作</h3><p>之前人物状态栏一直用的临时素材，这次统一规整一下。</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Biscuitsword" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Biscuitsword/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-11T13:44:08.000Z" title="2023/9/11 21:44:08">2023-09-11</time>发表</span><span class="level-item"><time dateTime="2023-09-11T16:14:49.301Z" title="2023/9/12 00:14:49">2023-09-12</time>更新</span><span class="level-item">5 分钟读完 (大约782个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/09/11/devlog-azoth-23-9-11/">devlog_azoth_23_9_11</a></p><div class="content"><h1 id="Azoth开发日志-2023-09"><a href="#Azoth开发日志-2023-09" class="headerlink" title="Azoth开发日志_2023_09"></a>Azoth开发日志_2023_09</h1><h2 id="9-9"><a href="#9-9" class="headerlink" title="9.9"></a>9.9</h2><h3 id="1-人物状态栏UI制作"><a href="#1-人物状态栏UI制作" class="headerlink" title="1. 人物状态栏UI制作"></a>1. 人物状态栏UI制作</h3><p>之前人物状态栏一直用的临时素材，这次统一规整一下。</p>
 <p>1.1 美术风格统一，之前制作的主界面都是石雕浮雕的风格，加之像素画风。</p>
 <p>目前采用AI生成浮雕花纹+手绘转绘的方式制作UI装饰。不过考虑到像素画风的特点可以考虑利用python+opencv自动处理一下图片来减轻单人开发的负担。</p>
 <p>大致思路：原始图片 -&gt; 灰度图片 -&gt; (0, 80, 160, 255)用两个阈值把灰度分三段 -&gt; 阈值内灰度设为固定值 -&gt; 按灰度图填色（最终也只需要三种颜色）。如此一来便省去了手工调色的麻烦，但手绘修改应该难以避免。</p>
 <p>不过目前需求还没有到需要批量处理的程度，暂时先凑合用。</p>
-<p>1.2 </p>
+<p>1.2 人物状态栏轻量化</p>
+<p>想尽可能让人物的状态栏简单点，目前的设计思路有点像《神界原罪》这种任务面板和背包的模式去做，不过毕竟没有那么多信息需要展示。目前加入了技能和武器的选择界面，加上一个人物的战斗小人。</p>
+<p>1.3 战斗小人</p>
 <h2 id="9-11"><a href="#9-11" class="headerlink" title="9.11"></a>9.11</h2><h3 id="1-简单部署到webgl"><a href="#1-简单部署到webgl" class="headerlink" title="1. 简单部署到webgl"></a>1. 简单部署到webgl</h3><p>想着要展示展示游戏开发进程，而Unity的跨平台能力如此强劲，于是乎尝试直接粗暴打包webgl，然后放到git上进行游玩。</p>
 <p>1.1 切换webgl平台，直接打包，过程顺利</p>
 <p>1.2 本地运行，感觉良好</p>
@@ -43,8 +45,7 @@
 <p><strong>寄</strong>。</p>
 <p>1.5 主要问题是加载到90%时卡住，更换模板的话则直接黑屏，推测player setting有问题，或者是因为初始化的时候尝试调取本地资源。</p>
 <p>1.6 （与Gpt）一番尝试，将player setting中的Compression format改为Disabled之后问题解决。皆大欢喜。</p>
-<img src="3.png" style="zoom: 33%;" />
-
+<p><img src="/2023/09/11/devlog-azoth-23-9-11/3.png"></p>
 <p>1.7 而对Application.persistentDataPath的读写居然能够在Webgl下正常运行令人惊讶。我</p>
 <p>推测在webgl下，该目录的读写会写入浏览器的缓存中保存，因为清除缓存&#x2F;更换浏览器&#x2F;无痕浏览都会使得存档消失。此外对Resources.Load的调用也能够正常运作，说明Unity打包webgl时和standalone打包一样将resources资源打包，白操作一场（Gpt害人不浅）。</p>
 <p>1.8 Demo地址 <a target="_blank" rel="noopener" href="https://www.biscuitsword.com/Azoth.github.io/">https://www.biscuitsword.com/Azoth.github.io/</a></p>
