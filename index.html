@@ -29,22 +29,22 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Biscuitsword" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Biscuitsword/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-11T13:44:08.000Z" title="2023/9/11 21:44:08">2023-09-11</time>发表</span><span class="level-item"><time dateTime="2023-09-11T15:47:13.918Z" title="2023/9/11 23:47:13">2023-09-11</time>更新</span><span class="level-item">3 分钟读完 (大约445个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/09/11/devlog-azoth-23-9-11/">devlog_azoth_23_9_11</a></p><div class="content"><h1 id="Azoth开发日志"><a href="#Azoth开发日志" class="headerlink" title="Azoth开发日志"></a>Azoth开发日志</h1><ol>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Biscuitsword" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Biscuitsword/"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-11T13:44:08.000Z" title="2023/9/11 21:44:08">2023-09-11</time>发表</span><span class="level-item"><time dateTime="2023-09-11T15:48:23.909Z" title="2023/9/11 23:48:23">2023-09-11</time>更新</span><span class="level-item">3 分钟读完 (大约445个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/09/11/devlog-azoth-23-9-11/">devlog_azoth_23_9_11</a></p><div class="content"><h1 id="Azoth开发日志"><a href="#Azoth开发日志" class="headerlink" title="Azoth开发日志"></a>Azoth开发日志</h1><ol>
 <li><p>简单部署到webgl</p>
 <p>想着要展示展示游戏开发进程，而Unity的跨平台能力如此强劲，于是乎尝试直接粗暴打包webgl，然后放到git上进行游玩。</p>
 <p>1.1 切换webgl平台，直接打包，过程顺利</p>
-<img src="devlog-azoth-23-9-11\1.png" alt="1" style="zoom: 50%;" />
+<img src="/devlog-azoth-23-9-11\1.png" alt="1" style="zoom: 50%;" />
 
 <p>1.2 本地运行，感觉良好</p>
-<img src="devlog-azoth-23-9-11\0.png" alt="0" style="zoom: 25%;" />
+<img src="/devlog-azoth-23-9-11\0.png" alt="0" style="zoom: 25%;" />
 
 <p>1.3 git开新仓库，上传webgl包。设置pages。</p>
-<img src="devlog-azoth-23-9-11\2.png" alt="2" style="zoom: 25%;" />
+<img src="/devlog-azoth-23-9-11\2.png" alt="2" style="zoom: 25%;" />
 
 <p>1.4 访问页面<a target="_blank" rel="noopener" href="https://www.biscuitsword.com/Azoth.github.io/%EF%BC%8C**%E5%AF%84**%E3%80%82">https://www.biscuitsword.com/Azoth.github.io/，**寄**。</a></p>
 <p>1.5 主要问题是加载到90%时卡住，更换模板的话则直接黑屏，推测player setting有问题，或者是因为初始化的时候尝试调取本地资源。</p>
 <p>1.6 （与Gpt）一番尝试，将player setting中的Compression format改为Disabled之后问题解决。皆大欢喜。</p>
-<img src="devlog-azoth-23-9-11\3.png" alt="3" style="zoom: 33%;" />
+<img src="/devlog-azoth-23-9-11\3.png" alt="3" style="zoom: 33%;" />
 
 <p>1.7 而对Application.persistentDataPath的读写居然能够在Webgl下正常运行令人惊讶。我</p>
 <p>推测在webgl下，该目录的读写会写入浏览器的缓存中保存，因为清除缓存&#x2F;更换浏览器&#x2F;无痕浏览都会使得存档消失。此外对Resources.Load的调用也能够正常运作，说明Unity打包webgl时和standalone打包一样将resources资源打包，白操作一场（Gpt害人不浅）。</p>
